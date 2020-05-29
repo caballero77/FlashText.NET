@@ -1,0 +1,75 @@
+[
+  {
+    "text": "SimpleTest",
+    "words": [
+      [ "SimpleTest", "SuccessResult" ]
+    ],
+    "expected": "SuccessResult"
+  },
+  {
+    "text": "Test case for test.",
+    "words": [
+      [ "test", "tset" ]
+    ],
+    "expected": "Test case for tset."
+  },
+  {
+    "text": "I`m sure that IOS better than Android.",
+    "words": [
+      [ "IOS", "Android" ],
+      [ "Android", "IOS" ]
+    ],
+    "expected": "I`m sure that Android better than IOS."
+  },
+  {
+    "text": "Shouldn`t replace.",
+    "words": [
+      [ "Shouldn`t", "Should" ]
+    ],
+    "expected": "Should replace."
+  },
+  {
+    "text": "Shouldn`t replace.",
+    "words": [
+      [ "Should", "Could" ]
+    ],
+    "expected": "Shouldn`t replace."
+  },
+  {
+    "text": "Very simple sentence.",
+    "words": [
+      [ "sentence", "test case" ]
+    ],
+    "expected": "Very simple test case."
+  },
+  {
+    "text": "Very simple sentence.",
+    "words": [
+      [ "Very", "Second" ]
+    ],
+    "expected": "Second simple sentence."
+  },
+  {
+    "text": "Replace a single char.",
+    "words": [
+      [ "a", "the" ]
+    ],
+    "expected": "Replace the single char."
+  },
+  {
+    "text": "I`m sure that IOS better than Android.",
+    "words": [
+      [ "IOS better than Android", "both of them are good" ],
+      [ "Android", "IOS" ]
+    ],
+    "expected": "I`m sure that both of them are good."
+  },
+  {
+    "text": "distributed super distributed super computing institute.",
+    "words": [
+      [ "distributed super computing", "Distributed Super Computing" ],
+      [ "distributed super computing institute", "Distributed Super Computing Institute" ]
+    ],
+    "expected": "distributed super Distributed Super Computing Institute."
+  }
+]

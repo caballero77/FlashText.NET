@@ -1,5 +1,8 @@
 ﻿using FlashText.NET.Interfaces;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Xunit;
 
 namespace FlashText.NET.Tests
@@ -8,38 +11,30 @@ namespace FlashText.NET.Tests
     {
         private readonly ITextReplacer textReplacer;
 
+        public static IEnumerable<object[]> TestCases;
+
         public TextReplacerTests()
         {
             this.textReplacer = new TextReplacer();
         }
 
+        static TextReplacerTests()
+        {
+            TestCases = JsonConvert
+                .DeserializeObject<IEnumerable<TestCase>>(File.ReadAllText("test_data.json"))
+                .Select(testCase => new object[] { testCase.Text, testCase.Words.Select(pair => (pair[0], pair[1])).ToArray(), testCase.Expected });
+        }
+
         public class ReplaceWords : TextReplacerTests
         {
             [Theory]
-            [MemberData(nameof(Data))]
+            [MemberData(nameof(TestCases))]
             public void Test(string text, (string, string)[] pairs, string expected)
             {
                 var actual = this.textReplacer.ReplaceWords(text, pairs);
 
                 Assert.Equal(expected, actual);
             }
-
-            public static IEnumerable<object[]> Data = new[]
-            {
-                new object[] { "SimpleTest", new[] { ("SimpleTest", "SuccessResult") }, "SuccessResult" },
-                new object[] { "Test case for test.", new[] { ("test", "tset") }, "Test case for tset." },
-                new object[] { "I`m sure that IOS better than Android.", new[] { ("IOS", "Android"), ("Android", "IOS") }, "I`m sure that Android better than IOS." },
-                new object[] { "Shouldn`t replace.", new [] { ("Shouldn`t", "Should") }, "Should replace." },
-                new object[] { "Shouldn`t replace.", new [] { ("Should", "Could") }, "Shouldn`t replace." },
-                new object[] { "Very simple sentence.", new [] { ("sentence", "test case") }, "Very simple test case." },
-                new object[] { "Very simple sentence.", new [] { ("Very", "Second") }, "Second simple sentence." },
-                new object[] { "Replace a single char.", new [] { ("a", "the") }, "Replace the single char." },
-                new object[] { "I`m sure that IOS better than Android.", new[] { ("IOS better than Android", "both of them are good"), ("Android", "IOS") }, "I`m sure that both of them are good." },
-                new object[] { "distributed super distributed super computing institute.", new [] {
-                    ("distributed super computing", "Distributed Super Computing"),
-                    ("distributed super computing institute", "Distributed Super Computing Institute"),
-                }, "distributed super Distributed Super Computing Institute." },
-            };
         }
     }
 }
