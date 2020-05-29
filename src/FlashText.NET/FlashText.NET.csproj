@@ -3,12 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <PackageId>FlashText.NET</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>Andrew Maslianko</Authors>
     <Product>FlashText.NET</Product>
     <Title>FlashText.NET</Title>
     <Description>This simple package can be used to replace words from any texts or sentences</Description>
     <Summary>This simple package can be used to replace words from any texts or sentences</Summary>
+    <RepositoryUrl>https://github.com/Caballero77/FlashText.NET</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
 </Project>
